@@ -1,0 +1,22 @@
+.simplebutton.word-game-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.simplebutton.word-game-card:hover:after {
+    content: 'Nächtes Wort >>';
+    position: absolute;
+    right: -1em;
+    bottom: -2em;
+    font-size: 12px;
+    width: max-content;
+    color: #A2A2A2;
+}
+
+.word-game-card h1 {
+    border-bottom: 1px solid #A2A2A2;
+}
+.word-game-card:hover h1 {
+    border-color: #ffffff;
+}
