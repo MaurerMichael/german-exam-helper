@@ -5,6 +5,22 @@ const wordButton = document.createElement("a")
 
 const topics = [
     {
+        level: "A1",
+        topic: "Vorstellen",
+        words: ['Name?', 'Alter?','Land?','Wohnort?','Sprachen?','Beruf?','Hobby?']
+    },
+    {
+        level: "A1",
+        topic: "Essen & Trinken",
+        words: ['Frühstück', 'Lieblingsessen','Sonntag','Bier','Fleisch','Brot']
+    },
+    {
+        level: "A1",
+        topic: "Einkaufen",
+        words: ['Zeitung','Kasse','Obst','Schuhe','Buch','Stadtplan']
+    },
+    {
+        level: "A2",
         topic: "Fragen zur Person",
         words: ['Urlaub', 'Arbeit','Einkaufen', 'Feste', 'Musik', 'Soziale Netzwerke', 'Wohnen', 'Kleidung', 'Ausbildung', 'Bücher', 'Tiere', 'Sport', 'Prüfung', 'Medien', 'Arbeitszeit', 'Telefonnummer', 'Aussehen', 'Herkunft', 'Haushalt', 'Verkehrsmittel', 'Essen und Trinken', 'Hobby', 'Lohn/Gehalt', 'Geburtstag', 'Familie', 'Lieblingsessen', 'Alter', 'Wetter', 'Kleidung', 'Freunde']
     }
@@ -19,6 +35,7 @@ class WordGame {
     wordArea
 
     constructor(t) {
+        this.level = t.level
         this.words = t.words
         this.topic = t.topic
         this.buildWordGame()
@@ -29,7 +46,7 @@ class WordGame {
         wordButton.innerHTML = ""
         wordButton.className = "simplebutton word-game-card"
         const topicArea = document.createElement("h1")
-        topicArea.innerText = this.topic
+        topicArea.innerText = this.topic + "("+this.level+")"
         wordButton.appendChild(topicArea)
         this.wordArea = document.createElement("span")
         wordButton.appendChild(this.wordArea)
