@@ -46,7 +46,7 @@ class WordGame {
         wordButton.innerHTML = ""
         wordButton.className = "simplebutton word-game-card"
         const topicArea = document.createElement("h1")
-        topicArea.innerText = this.topic + "("+this.level+")"
+        topicArea.innerText = this.topic + "  ("+this.level+")"
         wordButton.appendChild(topicArea)
         this.wordArea = document.createElement("span")
         wordButton.appendChild(this.wordArea)
@@ -65,6 +65,10 @@ class WordGame {
             this.wordArea.innerText = this.words[this.randomNumber()]
         }else {
             this.wordArea.innerText = "Du hast alle Wörter durch :D"
+            wordButton.onclick = () => {
+                nav.innerHTML = ""
+                nav.appendChild(topicList)
+            }
         }
     }
 }
@@ -75,6 +79,7 @@ function topicButtonFunc(topic) {
     activeGame = new WordGame(topic)
 }
 
+
 startButton.onclick = function () {
     nav.innerHTML = ""
     nav.appendChild(topicList)
@@ -82,7 +87,7 @@ startButton.onclick = function () {
         const link = document.createElement("a")
         const li = document.createElement("li")
         li.appendChild(link)
-        link.innerText = t.topic
+        link.innerText = t.topic + "  ("+t.level+")"
         link.className = "simplebutton"
         link.onclick = ()=>topicButtonFunc(t)
         topicList.appendChild(li)
