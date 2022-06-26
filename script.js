@@ -1,28 +1,42 @@
 const nav = document.querySelector("nav")
 const startButton = document.getElementById("startbutton")
-const topicList =document.createElement("ul")
+const topicList = document.createElement("ul")
 const wordButton = document.createElement("a")
 
-const topics = [
+const steps = [
     {
-        level: "A1",
-        topic: "Vorstellen",
-        words: ['Name?', 'Alter?','Land?','Wohnort?','Sprachen?','Beruf?','Hobby?']
+        label: "SPRECHEN TEIL 1 (A1)",
+        level: 1,
+        topics: [
+            {
+                topic: "Vorstellen",
+                words: ['Name?', 'Alter?', 'Land?', 'Wohnort?', 'Sprachen?', 'Beruf?', 'Hobby?']
+            }
+        ]
     },
     {
-        level: "A1",
-        topic: "Essen & Trinken",
-        words: ['Frühstück', 'Lieblingsessen','Sonntag','Bier','Fleisch','Brot']
+        label: "SPRECHEN TEIL 2 (A1)",
+        level: 1,
+        topics: [
+            {
+                topic: "Essen & Trinken",
+                words: ['Frühstück', 'Lieblingsessen', 'Sonntag', 'Bier', 'Fleisch', 'Brot']
+            },
+            {
+                topic: "Einkaufen",
+                words: ['Zeitung', 'Kasse', 'Obst', 'Schuhe', 'Buch', 'Stadtplan']
+            },
+        ]
     },
     {
-        level: "A1",
-        topic: "Einkaufen",
-        words: ['Zeitung','Kasse','Obst','Schuhe','Buch','Stadtplan']
-    },
-    {
-        level: "A2",
-        topic: "Fragen zur Person",
-        words: ['Urlaub', 'Arbeit','Einkaufen', 'Feste', 'Musik', 'Soziale Netzwerke', 'Wohnen', 'Kleidung', 'Ausbildung', 'Bücher', 'Tiere', 'Sport', 'Prüfung', 'Medien', 'Arbeitszeit', 'Telefonnummer', 'Aussehen', 'Herkunft', 'Haushalt', 'Verkehrsmittel', 'Essen und Trinken', 'Hobby', 'Lohn/Gehalt', 'Geburtstag', 'Familie', 'Lieblingsessen', 'Alter', 'Wetter', 'Kleidung', 'Freunde']
+        label: "SPRECHEN TEIL 2 (A2)",
+        level: 2,
+        topics: [
+            {
+                topic: "Fragen zur Person",
+                words: ['Urlaub', 'Arbeit', 'Einkaufen', 'Feste', 'Musik', 'Soziale Netzwerke', 'Wohnen', 'Kleidung', 'Ausbildung', 'Bücher', 'Tiere', 'Sport', 'Prüfung', 'Medien', 'Arbeitszeit', 'Telefonnummer', 'Aussehen', 'Herkunft', 'Haushalt', 'Verkehrsmittel', 'Essen und Trinken', 'Hobby', 'Lohn/Gehalt', 'Geburtstag', 'Familie', 'Lieblingsessen', 'Alter', 'Wetter', 'Kleidung', 'Freunde']
+            }
+        ]
     }
 ]
 
@@ -33,11 +47,19 @@ class WordGame {
     words = []
     activeIdx
     wordArea
+    topicArea
 
-    constructor(t) {
-        this.level = t.level
-        this.words = t.words
-        this.topic = t.topic
+    constructor(s) {
+        this.level = s.level
+
+        s.topics.forEach(t => {
+            t.words.forEach( w => {
+                this.words.push({
+                    topic: t.topic,
+                    word: w
+                })
+            })
+        })
         this.buildWordGame()
         this.nextWord()
     }
@@ -45,9 +67,8 @@ class WordGame {
     buildWordGame() {
         wordButton.innerHTML = ""
         wordButton.className = "simplebutton word-game-card"
-        const topicArea = document.createElement("h1")
-        topicArea.innerText = this.topic + "  ("+this.level+")"
-        wordButton.appendChild(topicArea)
+        this.topicArea = document.createElement("h1")
+        wordButton.appendChild(this.topicArea)
         this.wordArea = document.createElement("span")
         wordButton.appendChild(this.wordArea)
         wordButton.onclick = () => {
@@ -57,13 +78,16 @@ class WordGame {
     }
 
     randomNumber() {
-        return Math.floor(Math.random() * this.words.length);
+        this.activeIdx = Math.floor(Math.random() * this.words.length);
+        return this.activeIdx
     }
 
     nextWord() {
-        if(this.words.length > 0){
-            this.wordArea.innerText = this.words[this.randomNumber()]
-        }else {
+        if (this.words.length > 0) {
+            const w = this.words[this.randomNumber()]
+            this.topicArea.innerText = w.topic
+            this.wordArea.innerText = w.word
+        } else {
             this.wordArea.innerText = "Du hast alle Wörter durch :D"
             wordButton.onclick = () => {
                 nav.innerHTML = ""
@@ -73,23 +97,23 @@ class WordGame {
     }
 }
 
-function topicButtonFunc(topic) {
+function topicButtonFunc(step) {
     nav.innerHTML = ""
     nav.appendChild(wordButton)
-    activeGame = new WordGame(topic)
+    activeGame = new WordGame(step)
 }
 
 
 startButton.onclick = function () {
     nav.innerHTML = ""
     nav.appendChild(topicList)
-    topics.forEach(t => {
+    steps.forEach(t => {
         const link = document.createElement("a")
         const li = document.createElement("li")
         li.appendChild(link)
-        link.innerText = t.topic + "  ("+t.level+")"
+        link.innerText = t.label
         link.className = "simplebutton"
-        link.onclick = ()=>topicButtonFunc(t)
+        link.onclick = () => topicButtonFunc(t)
         topicList.appendChild(li)
     })
 }
