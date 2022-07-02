@@ -48,6 +48,7 @@ class WordGame {
     activeIdx
     wordArea
     topicArea
+    activeWord
 
     constructor(s) {
         this.level = s.level
@@ -80,7 +81,7 @@ class WordGame {
     randomWord() {
         this.activeIdx = Math.floor(Math.random() * this.words.length);
         const word = this.words[this.activeIdx]
-        if(this.activeWord.topic === word.topic) {
+        if(this.activeWord && this.activeWord.topic === word.topic) {
             return this.randomWord()
         }
         return word
