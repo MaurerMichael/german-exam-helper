@@ -77,16 +77,20 @@ class WordGame {
         }
     }
 
-    randomNumber() {
+    randomWord() {
         this.activeIdx = Math.floor(Math.random() * this.words.length);
-        return this.activeIdx
+        const word = this.words[this.activeIdx]
+        if(this.activeWord.topic === word.topic) {
+            return this.randomWord()
+        }
+        return word
     }
 
     nextWord() {
         if (this.words.length > 0) {
-            const w = this.words[this.randomNumber()]
-            this.topicArea.innerText = w.topic
-            this.wordArea.innerText = w.word
+            this.activeWord = this.randomWord()
+            this.topicArea.innerText = this.activeWord.topic
+            this.wordArea.innerText = this.activeWord.word
         } else {
             this.wordArea.innerText = "Du hast alle Wörter durch :D"
             wordButton.onclick = () => {
