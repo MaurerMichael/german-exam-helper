@@ -11,7 +11,7 @@ const steps = [
             {
                 topic: "Vorstellen",
                 words: ['Name?', 'Alter?', 'Land?', 'Wohnort?', 'Sprachen?', 'Beruf?', 'Hobby?']
-            }
+            },
         ]
     },
     {
@@ -26,6 +26,26 @@ const steps = [
                 topic: "Einkaufen",
                 words: ['Zeitung', 'Kasse', 'Obst', 'Schuhe', 'Buch', 'Stadtplan']
             },
+            {
+                topic: "Arbeit",
+                words: ['Beruf', 'Pause', 'Arbeitsplatz', 'Firma', 'Computer', 'Urlaub']
+            },
+            {
+                topic: "Urlaub",
+                words: ['Hotel', 'Meer', 'Auto']
+            },
+            {
+                topic: "Verkehr",
+                words: ['Fahrad', 'U-Bahn', 'Arbeit', 'Urlaub']
+            },
+            {
+                topic: "Freizeit und Hobby",
+                words: ['Wochenende', 'Hobby', 'Feierabend', 'Freunde', 'Sport', 'Fernsehen']
+            },
+            {
+                topic: "Wohnen",
+                words: ['Miete', 'Balkon', 'Farbe', 'Zimmer']
+            }
         ]
     },
     {
